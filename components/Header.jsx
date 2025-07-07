@@ -42,6 +42,7 @@ export default function Header({activeSection, sections}) {
       {/* Drawer mobile */}
       {open && (
         <div className="absolute top-16 left-0 w-full bg-white dark:bg-black flex flex-col items-center gap-4 py-4 md:hidden border-t border-zinc-700">
+          <ThemeToggle />
           {sectionListMobile}
         </div>
       )}
