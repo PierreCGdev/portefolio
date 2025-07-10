@@ -11,7 +11,7 @@ export default function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // ⛔️ ne rien rendre côté serveur
+  if (!mounted) return null;
 
   return (
     <button
@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
       title={theme === "light" ? "Mode clair" : "Mode sombre"}
     >
-      {theme === "light" ? <Sun size={20} /> : <Moon size={20} />}
+      {theme === "light" ? <Sun size={25} /> : <Moon size={25} />}
     </button>
   );
 }

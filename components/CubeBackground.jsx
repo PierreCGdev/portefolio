@@ -1,19 +1,26 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-export default function CubeBackground() {
-  return (
-    <div>
-      <Canvas
+import { useTheme } from "next-themes";
 
-        style={{ pointerEvents: "none" }} // pour que le canvas ne bloque pas les clics
-        camera={{ position: [0, 0, 5] }}
-      >
-        <ambientLight />
-        <mesh>
-          <boxGeometry />
-          <meshStandardMaterial color="lightblue" />
+export default function CubeBackground() {
+  const { theme, setTheme } = useTheme();
+  const cubeColor = theme === "light" ? "#ffffff" : "#000000";
+  const gridX = 20;
+  const gridY = 20;
+  const cubeSpacing = 3;
+
+  const cubesGrid = [];
+  for (let x = 0; x < gridX; x++) {
+    for (let z = 0; z < gridY; z++) {
+      const xPos = (x - (gridX - 1) / 2) * cubeSpacing;
+      const zPos = (z - (gridY - 1) / 2) * cubeSpacing;
+      cubesGrid.push(
+        <mesh key={`cube-${x}-${z}`} position={[xPos, zPos, 0]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color={cubeColor} />
         </mesh>
-      </Canvas>
-    </div>
-  );
+      );
+    }
+  }
+  return <group>{cubesGrid}</group>;
 }
