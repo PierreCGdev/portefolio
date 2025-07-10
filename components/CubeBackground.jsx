@@ -1,13 +1,24 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { useTheme } from "next-themes";
+import { useRef } from "react";
 
-export default function CubeBackground() {
+export default function CubeBackground({ scrollY }) {
+  const groupRef = useRef();
   const { theme, setTheme } = useTheme();
   const cubeColor = theme === "light" ? "#ffffff" : "#000000";
   const gridX = 20;
-  const gridY = 20;
-  const cubeSpacing = 3;
+  const gridY = 10;
+  const cubeSpacing = 1;
+
+  useFrame(() => {
+    if (groupRef.current) {
+      const offset = scrollY.current * 0.01;
+
+      // Animation du groupe global
+      groupRef.current.position.y = offset;
+    }
+  });
 
   const cubesGrid = [];
   for (let x = 0; x < gridX; x++) {
@@ -22,5 +33,5 @@ export default function CubeBackground() {
       );
     }
   }
-  return <group>{cubesGrid}</group>;
+  return <group ref={groupRef}>{cubesGrid}</group>;
 }
