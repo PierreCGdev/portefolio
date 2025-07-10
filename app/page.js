@@ -3,7 +3,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CubeBackground from "../components/CubeBackground";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ThemeProvider from "../components/ThemeProvider";
 import Button from "../components/Button";
 import MotionReveal from "../components/motionReveal";
@@ -12,19 +12,13 @@ import { Canvas } from "@react-three/fiber";
 export default function Home() {
   const sections = ["Home", "Parcours", "Outil", "Projet"];
   const [activeSection, setActiveSection] = useState("Home");
-  const [size, setSize] = useState({
-    height: 0,
-    width: 0,
-  });
+  // const [scrollY, setScrollY] = useState(0);
+
+  const testY = useRef(0);
 
   useEffect(() => {
-    const updateSize = () => {
-      setSize({
-        height: document.documentElement.scrollHeight,
-        width: document.documentElement.scrollWidth,
-      });
-    };
     const handleScroll = () => {
+      testY.current = window.scrollY;
       const scrollPos = window.scrollY + window.innerHeight / 2;
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -40,13 +34,11 @@ export default function Home() {
       }
     };
     handleScroll();
-    updateSize();
+
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", updateSize);
     window.addEventListener("resize", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateSize);
       window.removeEventListener("resize", handleScroll);
     };
   }, []);
@@ -59,16 +51,15 @@ export default function Home() {
       disableTransitionOnChange
     >
       <div>
-        <div className="absolute w-100vw h-l00vh">
+        <div className="fixed inset-0 w-full h-full">
           <Canvas
-            style={{
-              pointerEvents: "none",
-              width: "100vw",
-              height: "100vh",
-            }}
-            camera={{ position: [0, 10, 0], fov: 75 }}
+            // style={{
+            //   pointerEvents: "over",
+            // }}
+            camera={{ position: [0, 0, 15], fov: 75 }}
           >
-            <CubeBackground />
+            <ambientLight />
+            <CubeBackground scrollY={testY} />
           </Canvas>
         </div>
 
@@ -76,7 +67,7 @@ export default function Home() {
           sections={["Home", "Parcours", "Outil", "Projet"]}
           activeSection={activeSection}
         />
-        <main className="relative">
+        <main className="relative" style={{ pointerEvents: "none" }}>
           <section
             id="Home"
             className="h-screen w-screen  flex flex-col items-start justify-center p-13 md:p-30 xl:p-50"
@@ -97,9 +88,9 @@ export default function Home() {
           </section>
           <section
             id="Parcours"
-            className="h-screen w-screen  bg-white dark:bg-black flex flex-col items-start justify-center p-13 md:p-30 xl:p-50"
+            className="h-screen w-screen  flex flex-col items-start justify-center p-13 md:p-30 xl:p-50"
           >
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-end">
               <div className="flex flex-row">
                 <Image
                   src="/images/portrait.jpg"
@@ -154,14 +145,14 @@ export default function Home() {
 
           <section
             id="Outil"
-            className="h-screen w-screen  bg-white dark:bg-black flex items-center justify-center"
+            className="h-screen w-screen  flex items-center justify-center"
           >
             <h1>Écran 3</h1>
           </section>
 
           <section
             id="Projet"
-            className="h-screen w-screen  bg-white dark:bg-black flex items-center justify-center"
+            className="h-screen w-screen   flex items-center justify-center"
           >
             <h1>Écran 4</h1>
           </section>
