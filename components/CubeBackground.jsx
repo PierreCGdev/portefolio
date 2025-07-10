@@ -9,7 +9,7 @@ export default function CubeBackground({ scrollY }) {
   const cubeColor = theme === "light" ? "#ffffff" : "#000000";
   const gridX = 20;
   const gridY = 10;
-  const cubeSpacing = 1;
+  const cubeSpacing = 2;
 
   useFrame(() => {
     if (groupRef.current) {
@@ -26,7 +26,11 @@ export default function CubeBackground({ scrollY }) {
       const xPos = (x - (gridX - 1) / 2) * cubeSpacing;
       const zPos = (z - (gridY - 1) / 2) * cubeSpacing;
       cubesGrid.push(
-        <mesh key={`cube-${x}-${z}`} position={[xPos, zPos, 0]}>
+        <mesh
+          key={`cube-${x}-${z}`}
+          position={[xPos, zPos, 0]}
+          onPointerOver={() => console.log("ici")}
+        >
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color={cubeColor} />
         </mesh>
