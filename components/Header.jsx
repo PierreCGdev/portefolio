@@ -27,7 +27,7 @@ export default function Header({ activeSection, sections }) {
     );
   });
   return (
-    <header className="w-full flex items-center justify-between px-15 py-10 text-black dark:text-white fixed top-0 z-50 bg-gradient-to-b from-white/100 dark:from-black/100 to-transparent">
+    <header className="w-full flex items-center justify-between px-15 py-10 text-black dark:text-white fixed top-0 z-50 bg-gradient-to-b from-neutral-50/100 dark:from-neutral-800/100 to-transparent">
       <div className="text-xl font-bold">PC</div>
       <div className="flex items-center gap-10 lg:gap-14">
         {" "}

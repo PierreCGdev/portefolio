@@ -8,17 +8,18 @@ import ThemeProvider from "../components/ThemeProvider";
 import Button from "../components/Button";
 import MotionReveal from "../components/motionReveal";
 import { Canvas } from "@react-three/fiber";
+import { AdaptiveDpr } from "@react-three/drei";
+import { PerformanceMonitor } from "@react-three/drei";
 
 export default function Home() {
   const sections = ["Home", "Parcours", "Outil", "Projet"];
   const [activeSection, setActiveSection] = useState("Home");
-  // const [scrollY, setScrollY] = useState(0);
 
-  const testY = useRef(0);
+  const yScroll = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      testY.current = window.scrollY;
+      yScroll.current = window.scrollY;
       const scrollPos = window.scrollY + window.innerHeight / 2;
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -52,14 +53,20 @@ export default function Home() {
     >
       <div>
         <div className="fixed inset-0 w-full h-full">
-          <Canvas
-            // style={{
-            //   pointerEvents: "over",
-            // }}
-            camera={{ position: [0, 0, 15], fov: 75 }}
-          >
-            <ambientLight />
-            <CubeBackground scrollY={testY} />
+          {/* <CubeGridCanvas className="inset-50" /> */}
+          <Canvas shadows camera={{ position: [0, 0, 20], fov: 30 }}>
+            <ambientLight intensity={4} color={"#ffffff"} />
+            <directionalLight
+              color={"#ffffff"}
+              position={[0, 10, 10]}
+              intensity={4}
+              castShadow
+              shadow-mapSize-width={2048}
+              shadow-mapSize-height={2048}
+              shadow-camera-left={-20}
+              shadow-camera-right={20}
+            />
+            <CubeBackground scrollY={yScroll} />
           </Canvas>
         </div>
 
