@@ -12,7 +12,7 @@ import { AdaptiveDpr } from "@react-three/drei";
 import { PerformanceMonitor } from "@react-three/drei";
 
 export default function Home() {
-  const sections = ["Home", "Parcours", "Outil", "Projet"];
+  const sections = ["Home", "Projet", "Parcours", "Outil"];
   const [activeSection, setActiveSection] = useState("Home");
 
   const yScroll = useRef(0);
@@ -70,11 +70,9 @@ export default function Home() {
           </Canvas>
         </div>
 
-        <Header
-          sections={["Home", "Parcours", "Outil", "Projet"]}
-          activeSection={activeSection}
-        />
+        <Header sections={sections} activeSection={activeSection} />
         <main className="relative" style={{ pointerEvents: "none" }}>
+          {/* home */}
           <section
             id="Home"
             className="h-screen w-screen  flex flex-col items-start justify-center p-13 md:p-30 xl:p-50"
@@ -92,6 +90,13 @@ export default function Home() {
                 </h1>
               </MotionReveal>
             </div>
+          </section>
+          {/* projets */}
+          <section
+            id="Projet"
+            className="h-screen w-screen   flex items-center justify-center"
+          >
+            <h1>Écran projets</h1>
           </section>
           <section
             id="Parcours"
@@ -155,13 +160,6 @@ export default function Home() {
             className="h-screen w-screen  flex items-center justify-center"
           >
             <h1>Écran 3</h1>
-          </section>
-
-          <section
-            id="Projet"
-            className="h-screen w-screen   flex items-center justify-center"
-          >
-            <h1>Écran 4</h1>
           </section>
         </main>
         {/* <Footer /> */}
