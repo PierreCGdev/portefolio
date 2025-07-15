@@ -10,8 +10,8 @@ export default function Header({ activeSection, sections }) {
       <a
         key={section}
         href={`#${section}`}
-        className={`hover:text-pink-400 ${
-          activeSection === section ? "text-blue-400" : ""
+        className={`hover:text-menu-secondary ${
+          activeSection === section ? "text-menu-primary" : ""
         }`}
       >
         {section}
@@ -27,7 +27,7 @@ export default function Header({ activeSection, sections }) {
     );
   });
   return (
-    <header className="w-full flex items-center justify-between px-15 py-10 text-black dark:text-white fixed top-0 z-50 bg-gradient-to-b from-neutral-50/100 dark:from-neutral-800/100 to-transparent">
+    <header className="w-full flex items-center justify-between px-15 py-10  fixed top-0 z-50 bg-gradient-to-b from-neutral-50/100 dark:from-neutral-800/100 to-transparent">
       <div className="text-xl font-bold">PC</div>
       <div className="flex items-center gap-10 lg:gap-14">
         {" "}
@@ -42,7 +42,7 @@ export default function Header({ activeSection, sections }) {
         </button>
         {/* Drawer mobile */}
         {open && (
-          <div className="absolute top-16 left-0 w-full bg-white dark:bg-black flex flex-col items-center gap-4 py-4 md:hidden border-t border-zinc-700">
+          <div className="absolute top-16 left-0 w-full  flex flex-col items-center gap-4 py-4 md:hidden border-t border-zinc-700">
             {sectionListMobile}
           </div>
         )}

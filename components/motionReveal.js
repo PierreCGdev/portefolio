@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 export default function MotionReveal({ children, delay = 0.25 }) {
   return (
     <motion.div
-      className="z-10 relative"
+      className="relative"
       variants={{
         hidden: { opacity: 0, y: 75 },
         visible: {

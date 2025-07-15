@@ -77,12 +77,12 @@ export default function Home() {
           {/* home */}
           <section
             id="Home"
-            className="h-dvh w-dvw"
+            className="h-[100dvh] relative snap-start"
             style={{ pointerEvents: "none" }}
           >
-            <div className="relative z-10 h-screen w-screen  flex flex-col items-start justify-center p-13 sm:p-20 md:p-30 lg:p-45 xl:p-65 2xl:70">
+            <div className="relative z-10 h-full w-full  flex flex-col items-start justify-center p-13 md:p-30 xl:p-50">
               <MotionReveal delay={0.25}>
-                <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl break-all sm:break-normal  font-bold text-primary ">
+                <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-green-400">
                   Pierre Castanet
                 </h1>
                 {/* <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold bg-[linear-gradient(60deg,_rgb(44,_162,_180),_rgb(85,_152,_222),_rgb(127,_135,_255),_rgb(246,_90,_173),_rgb(236,_61,_67))]  bg-clip-text text-transparent">
@@ -90,13 +90,13 @@ export default function Home() {
                 </h1> */}
               </MotionReveal>
               <MotionReveal delay={0.5}>
-                <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl font-bold break-all sm:break-normal">
-                  <span className="text-secondary">de motion designer à</span>{" "}
+                <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold">
+                  <span className="text-neutral-400">de motion designer à</span>{" "}
                   développeur full stack
                 </h1>
               </MotionReveal>
             </div>
-            <div className="absolute inset-0 h-screen w-screen z-0">
+            <div className="absolute inset-0 h-full w-full">
               <CanvasReveal>
                 <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
                   <ambientLight intensity={4} color={"#ffffff"} />
@@ -116,10 +116,10 @@ export default function Home() {
             </div>
           </section>
           {/* projets */}
-          <section id="Projet" className="h-dvh w-dvw bg-amber-200">
-            <div className="relative z-10 h-screen w-screen  flex flex-col items-center justify-center p-13 md:p-30 xl:p-50">
+          <section id="Projet" className="h-[100dvh] relative snap-start">
+            <div className="relative z-10 hh-full w-full  flex flex-col items-center justify-center p-13 md:p-30 xl:p-50">
               <MotionReveal delay={0.25}>
-                <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-primary">
+                <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-green-400">
                   Mes projets
                 </h2>
 
@@ -128,13 +128,22 @@ export default function Home() {
                 </h1> */}
               </MotionReveal>
               <div className="flex flex-row m-10">
-                <MotionReveal delay={0.5}></MotionReveal>
+                {/* <ProjectCard />
+                <ProjectCard />
+                <ProjectCard />
+                <ProjectCard /> */}
               </div>
             </div>
           </section>
-          <section id="Parcours" className="h-dvh w-dvw">
+          <section id="Parcours" className="h-[100dvh] relative snap-start">
             <div className="relative flex flex-col items-end justify-center p-13 md:p-30 xl:p-50 z-10">
               <div className="flex flex-row">
+                <Image
+                  src="/images/portrait.jpg"
+                  alt="Pierre Castanet"
+                  width={300}
+                  height={300}
+                />
                 <div className="ml-10">
                   <MotionReveal delay={0.15}>
                     <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold bg-[linear-gradient(60deg,_rgb(44,_162,_180),_rgb(85,_152,_222),_rgb(127,_135,_255),_rgb(246,_90,_173),_rgb(236,_61,_67))]  bg-clip-text text-transparent">
@@ -180,10 +189,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section
-            id="Outil"
-            className="h-screen w-screen  flex items-center justify-center"
-          >
+          <section id="Outil" className="h-[100dvh] relative snap-start">
             <h1>Écran 3</h1>
           </section>
         </main>

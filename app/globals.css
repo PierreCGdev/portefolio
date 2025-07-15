@@ -1,5 +1,12 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #43e5a2;
+  --color-secondary: #A1A1A1;
+  --color-menu-primary: #43e5a2;
+  --color-menu-secondary: #2ba16e;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -8,3 +15,4 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+

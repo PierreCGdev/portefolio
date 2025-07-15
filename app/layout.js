@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${openSans.variable} ${quicksand.variable} antialiased bg-neutral-50 dark:bg-neutral-800`}
+        className={`${openSans.variable} ${quicksand.variable} antialiased bg-neutral-50 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-50 `}
       >
         <main>{children}</main>
       </body>
