@@ -9,6 +9,7 @@ export default function MotionReveal({ children, delay = 0.25 }) {
         visible: {
           opacity: 1,
           y: 0,
+
           transition: {
             duration: 0.4,
             delay: delay + 0.1,

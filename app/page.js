@@ -4,15 +4,14 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CubeBackground from "../components/CubeBackground";
 import CubeBgHome from "../components/CubeBgHome";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import ThemeProvider from "../components/ThemeProvider";
 import Button from "../components/Button";
 import MotionReveal from "../components/motionReveal";
 import CanvasReveal from "../components/CanvasReveal";
 import { Canvas } from "@react-three/fiber";
-import { AdaptiveDpr } from "@react-three/drei";
-import { PerformanceMonitor } from "@react-three/drei";
 import ProjectCard from "../components/ProjectCard";
+import ProjectGallery from "../components/ProjectGallery";
 
 export default function Home() {
   const sections = ["Home", "Projet", "Parcours", "Outil"];
@@ -55,23 +54,6 @@ export default function Home() {
       disableTransitionOnChange
     >
       <div>
-        {/* <div className="fixed inset-0 w-full h-full">
-          <Canvas shadows camera={{ position: [0, 0, 20], fov: 30 }}>
-            <ambientLight intensity={4} color={"#ffffff"} />
-            <directionalLight
-              color={"#ffffff"}
-              position={[0, 10, 10]}
-              intensity={4}
-              castShadow
-              shadow-mapSize-width={2048}
-              shadow-mapSize-height={2048}
-              shadow-camera-left={-20}
-              shadow-camera-right={20}
-            />
-            <CubeBackground scrollY={yScroll} />
-          </Canvas>
-        </div> */}
-
         <Header sections={sections} activeSection={activeSection} />
         <main className="relative">
           {/* home */}
@@ -81,15 +63,12 @@ export default function Home() {
             style={{ pointerEvents: "none" }}
           >
             <div className="relative z-10 h-screen w-screen  flex flex-col items-start justify-center p-13 sm:p-20 md:p-30 lg:p-45 xl:p-65 2xl:70">
-              <MotionReveal delay={0.25}>
+              <MotionReveal delay={0.1}>
                 <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl break-all sm:break-normal  font-bold text-primary ">
                   Pierre Castanet
                 </h1>
-                {/* <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold bg-[linear-gradient(60deg,_rgb(44,_162,_180),_rgb(85,_152,_222),_rgb(127,_135,_255),_rgb(246,_90,_173),_rgb(236,_61,_67))]  bg-clip-text text-transparent">
-                  Pierre Castanet
-                </h1> */}
               </MotionReveal>
-              <MotionReveal delay={0.5}>
+              <MotionReveal delay={0.25}>
                 <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl font-bold break-all sm:break-normal">
                   <span className="text-secondary">de motion designer à</span>{" "}
                   développeur full stack
@@ -116,16 +95,14 @@ export default function Home() {
             </div>
           </section>
           {/* projets */}
-          <section id="Projet" className="h-dvh w-dvw bg-amber-200">
+          <section id="Projet" className="h-dvh w-dvw">
             <div className="relative z-10 h-screen w-screen  flex flex-col items-center justify-center p-13 md:p-30 xl:p-50">
-              <MotionReveal delay={0.25}>
-                <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-primary">
+              <MotionReveal delay={0.1}>
+                <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-primary mb-20 text-center">
                   Mes projets
                 </h2>
 
-                {/* <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold bg-[linear-gradient(60deg,_rgb(44,_162,_180),_rgb(85,_152,_222),_rgb(127,_135,_255),_rgb(246,_90,_173),_rgb(236,_61,_67))]  bg-clip-text text-transparent">
-                  Pierre Castanet
-                </h1> */}
+                <ProjectGallery />
               </MotionReveal>
               <div className="flex flex-row m-10">
                 <MotionReveal delay={0.5}></MotionReveal>
