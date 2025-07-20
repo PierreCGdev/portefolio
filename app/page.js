@@ -12,9 +12,10 @@ import CanvasReveal from "../components/CanvasReveal";
 import { Canvas } from "@react-three/fiber";
 import ProjectCard from "../components/ProjectCard";
 import ProjectGallery from "../components/ProjectGallery";
+import MotionButton from "../components/MotionButton";
 
 export default function Home() {
-  const sections = ["Home", "Projet", "Parcours", "Outil"];
+  const sections = ["Home", "Projet", "A propos"];
   const [activeSection, setActiveSection] = useState("Home");
 
   const yScroll = useRef(0);
@@ -46,6 +47,15 @@ export default function Home() {
     };
   }, []);
 
+  const styles = {
+    section:
+      "h-screen w-screen flex flex-col items-center justify-center p-13 sm:p-20 md:p-30 lg:p-45 xl:p-65 2xl:p-70",
+    sectionContent:
+      "relative z-10 h-full w-full flex flex-col items-center justify-center",
+    title:
+      "text-2xl sm:text-4xl md:text-6xl xl:text-8xl break-all sm:break-normal  font-bold text-primary dark:text-primary-dark ",
+  };
+
   return (
     <ThemeProvider
       attribute="class"
@@ -59,14 +69,12 @@ export default function Home() {
           {/* home */}
           <section
             id="Home"
-            className="h-dvh w-dvw"
+            className={styles.section}
             style={{ pointerEvents: "none" }}
           >
-            <div className="relative z-10 h-screen w-screen  flex flex-col items-start justify-center p-13 sm:p-20 md:p-30 lg:p-45 xl:p-65 2xl:70">
+            <div className="relative z-10 h-full w-full  flex flex-col items-start justify-center">
               <MotionReveal delay={0.1}>
-                <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl break-all sm:break-normal  font-bold text-primary ">
-                  Pierre Castanet
-                </h1>
+                <h1 className={styles.title}>Pierre Castanet</h1>
               </MotionReveal>
               <MotionReveal delay={0.25}>
                 <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl font-bold break-all sm:break-normal">
@@ -95,32 +103,36 @@ export default function Home() {
             </div>
           </section>
           {/* projets */}
-          <section id="Projet" className="h-dvh w-dvw">
-            <div className="relative z-10 h-screen w-screen  flex flex-col items-center justify-center p-13 md:p-30 xl:p-50">
+          <section id="Projet" className={styles.section}>
+            <div className="relative z-10 h-2/3 w-full  flex flex-col items-center justify-between">
               <MotionReveal delay={0.1}>
-                <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold text-primary mb-20 text-center">
-                  Mes projets
-                </h2>
-
+                <div className="text-center">
+                  <h2 className={styles.title}>Mes projets</h2>
+                </div>
+              </MotionReveal>
+              <MotionReveal>
                 <ProjectGallery />
               </MotionReveal>
-              <div className="flex flex-row m-10">
-                <MotionReveal delay={0.5}></MotionReveal>
+              <div className="flex flex-row">
+                <MotionReveal delay={0.5}>
+                  <MotionButton
+                    text="Mon Github"
+                    link={"https://github.com/PierreCGdev?tab=repositories"}
+                  />
+                </MotionReveal>
               </div>
             </div>
           </section>
-          <section id="Parcours" className="h-dvh w-dvw">
-            <div className="relative flex flex-col items-end justify-center p-13 md:p-30 xl:p-50 z-10">
-              <div className="flex flex-row">
-                <div className="ml-10">
+          <section id="A propos" className={styles.section}>
+            <div className="relative h-1/2 w-full  flex flex-col items-end justify-between">
+              <div className="flex flex-row text-right">
+                <div>
                   <MotionReveal delay={0.15}>
-                    <h2 className="text-4xl sm:text-6xl md:text-7xl xl:text-8xl font-bold bg-[linear-gradient(60deg,_rgb(44,_162,_180),_rgb(85,_152,_222),_rgb(127,_135,_255),_rgb(246,_90,_173),_rgb(236,_61,_67))]  bg-clip-text text-transparent">
-                      mon parcours
-                    </h2>
+                    <h2 className={styles.title}>mon parcours</h2>
                   </MotionReveal>
                   <MotionReveal delay={0.3}>
                     <div>
-                      <h3 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mt:10">
+                      <h3 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mt-3">
                         <span className="text-neutral-400">
                           de motion designer à{" "}
                         </span>
@@ -131,7 +143,7 @@ export default function Home() {
                 </div>
               </div>
               <MotionReveal delay={0.45}>
-                <p className="text-md sm:text-xl md:text-2xl xl:text-3xl mt-10">
+                <p className="text-right text-md sm:text-xl md:text-2xl xl:text-3xl">
                   Issu du monde du{" "}
                   <span className="font-bold">motion design</span>, j’ai
                   découvert <span className="font-bold">JavaScript</span> en
@@ -149,20 +161,20 @@ export default function Home() {
                 </p>
               </MotionReveal>
               <MotionReveal delay={0.6}>
-                <Button
+                <MotionButton
                   text="LinkedIn"
-                  link="https://fr.linkedin.com/in/pierre-castanet-4b489493"
+                  link={"https://fr.linkedin.com/in/pierre-castanet-4b489493"}
                 />
               </MotionReveal>
             </div>
           </section>
 
-          <section
+          {/* <section
             id="Outil"
-            className="h-screen w-screen  flex items-center justify-center"
+            className="h-screen w-screen flex items-center justify-center"
           >
             <h1>Écran 3</h1>
-          </section>
+          </section> */}
         </main>
         {/* <Footer /> */}
       </div>

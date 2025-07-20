@@ -11,7 +11,7 @@ export default function ProjectGallery() {
 
   return (
     <LayoutGroup>
-      <ul className="flex flex-wrap gap-8 justify-center">
+      <div className="flex flex-wrap gap-8 lg:gap-14 justify-center">
         {data.map((project, i) => (
           <MotionReveal delay={(i + 1) * 0.25} key={project.id}>
             <ProjectCard
@@ -20,7 +20,7 @@ export default function ProjectGallery() {
             />
           </MotionReveal>
         ))}
-      </ul>
+      </div>
 
       <AnimatePresence>
         {selectedId && (

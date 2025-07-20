@@ -2,11 +2,16 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #43e5a2;
+  --color-primary: #30bf84;
+  --color-primary-dark: #43e5a2;
   --color-secondary: #A1A1A1;
-  --color-menu-primary: #43e5a2;
-  --color-menu-secondary: #2ba16e;
+  --color-secondary-dark: #c7c7c7;
+  --color-menu-primary: #30bf84;
+  --color-menu-primary-dark: #43e5a2;
+  --color-menu-secondary: #188c5c;
+  --color-menu-secondary-dark: #2ba16e;
 }
+
 html {
   scroll-behavior: smooth;
 }

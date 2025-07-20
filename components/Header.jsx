@@ -10,8 +10,10 @@ export default function Header({ activeSection, sections }) {
       <a
         key={section}
         href={`#${section}`}
-        className={`hover:text-menu-secondary ${
-          activeSection === section ? "text-menu-primary" : ""
+        className={`hover:text-menu-secondary hover:dark:text-menu-secondary-dark  ${
+          activeSection === section
+            ? "text-menu-primary dark:text-menu-primary-dark"
+            : ""
         }`}
       >
         {section}
