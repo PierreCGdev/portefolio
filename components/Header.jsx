@@ -32,10 +32,9 @@ export default function Header({ activeSection, sections }) {
     <header className="w-full flex items-center justify-between px-15 py-10  fixed top-0 z-50 bg-gradient-to-b from-neutral-50/100 dark:from-neutral-800/100 to-transparent">
       <div className="text-xl font-bold">PC</div>
       <div className="flex items-center gap-10 lg:gap-14">
-        {" "}
         <ThemeToggle />
         {/* Desktop menu */}
-        <nav className="hidden md:flex gap-20 text-xl items-center">
+        <nav className="hidden md:flex gap-20 md:lg lg:text-xl xl:text-2xl items-center">
           {sectionList}
         </nav>
         {/* Mobile burger */}

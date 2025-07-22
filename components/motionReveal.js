@@ -1,13 +1,14 @@
 import { motion } from "motion/react";
 
-export default function MotionReveal({ children, delay = 0.25 }) {
+export default function MotionReveal({ children, delay = 0.25, rotation = 0 }) {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 75 },
+        hidden: { opacity: 0, y: 75, rotate: rotation },
         visible: {
           opacity: 1,
           y: 0,
+          rotate: 0,
 
           transition: {
             duration: 0.4,

@@ -1,9 +1,10 @@
+"use client";
 import { motion } from "motion/react";
 
 export function ProjectCard({ id, title, img, onClick }) {
   return (
     <div
-      className="cursor-pointer w-50 h-50 md:w-60 md:h-60 lg:w-80 lg:h-80 xl:w-100 xl:h-100 hover:text-primary dark:hover:text-primary-dark  "
+      className="cursor-pointer w-40 h-40 sm:w-50 sm:h-50  lg:w-60 lg:h-60 xl:w-60 xl:h-60 2xl:w-62 2xl:h-62 hover:text-primary dark:hover:text-primary-dark  "
       onClick={onClick}
     >
       <motion.div
@@ -14,7 +15,7 @@ export function ProjectCard({ id, title, img, onClick }) {
         {/* Image en fond */}
         <motion.img
           layoutId={`card-image-${id}`}
-          src={img}
+          src={`/images/${img}`}
           alt={title}
           className="absolute inset-0 w-full h-2/3 object-cover "
         />
@@ -26,11 +27,12 @@ export function ProjectCard({ id, title, img, onClick }) {
         <motion.h3
           layoutId={`card-title-${id}`}
           layout="position"
-          className="relative z-10 p-4 text-2xl sm:text-3xl md:text-5xl xl:text-6xl font-bold w-full h-1/3"
+          className="relative z-10 p-4 text-lg sm:text-xl md:text-2xl xl:text-3xl  2xl:text-4xl font-bold w-full h-1/3"
         >
           {title}
         </motion.h3>
       </motion.div>
+      
     </div>
   );
 }

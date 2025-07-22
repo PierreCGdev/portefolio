@@ -6,13 +6,12 @@ import CubeBackground from "../components/CubeBackground";
 import CubeBgHome from "../components/CubeBgHome";
 import { useState, useEffect, useRef, Suspense } from "react";
 import ThemeProvider from "../components/ThemeProvider";
-import Button from "../components/Button";
 import MotionReveal from "../components/motionReveal";
 import CanvasReveal from "../components/CanvasReveal";
 import { Canvas } from "@react-three/fiber";
-import ProjectCard from "../components/ProjectCard";
 import ProjectGallery from "../components/ProjectGallery";
 import MotionButton from "../components/MotionButton";
+import { IconsRender } from "../components/IconsRender";
 
 export default function Home() {
   const sections = ["Home", "Projet", "A propos"];
@@ -47,43 +46,58 @@ export default function Home() {
     };
   }, []);
 
+  const techStack = [
+    "TypeScript",
+    "React",
+    "React Native",
+    "Next.js",
+    "Three.js",
+    "Framer Motion",
+    "TailwindCSS",
+    "Expo",
+    "Redux",
+    "Express.js",
+    "Node.js",
+    "MongoDB",
+    "Vercel",
+  ];
+
+  const designStack = [
+    "After Effect",
+    "Photoshop",
+    "Illustrator",
+    "Premiere Pro",
+    "Cinema 4D",
+    "Figma",
+  ];
+
   const styles = {
     section:
-      "h-screen w-screen flex flex-col items-center justify-center p-13 sm:p-20 md:p-30 lg:p-45 xl:p-65 2xl:p-70",
-    sectionContent:
-      "relative z-10 h-full w-full flex flex-col items-center justify-center",
+      "h-screen w-screen flex flex-col items-center justify-center p-17 sm:p-25 md:p-33 lg:p-40 xl:p-45 2xl:p-70",
+    sectionContent: "relative z-10 h-full w-full flex flex-col items-center justify-center",
     title:
-      "text-2xl sm:text-4xl md:text-6xl xl:text-8xl break-all sm:break-normal  font-bold text-primary dark:text-primary-dark ",
+      "text-2xl sm:text-3xl md:text-4xl lg:5xl xl:text-6xl 2xl:text-7xl break-all sm:break-normal  font-bold text-primary dark:text-primary-dark ",
   };
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
       <div>
         <Header sections={sections} activeSection={activeSection} />
         <main className="relative">
           {/* home */}
-          <section
-            id="Home"
-            className={styles.section}
-            style={{ pointerEvents: "none" }}
-          >
-            <div className="relative z-10 h-full w-full  flex flex-col items-start justify-center">
+          <section id="Home" className={styles.section} style={{ pointerEvents: "none" }}>
+            <div className="relative z-10 flex h-full w-full flex-col items-start justify-center">
               <MotionReveal delay={0.1}>
                 <h1 className={styles.title}>Pierre Castanet</h1>
               </MotionReveal>
               <MotionReveal delay={0.25}>
-                <h1 className="text-2xl sm:text-4xl md:text-6xl xl:text-8xl font-bold break-all sm:break-normal">
-                  <span className="text-secondary">de motion designer à</span>{" "}
-                  développeur full stack
+                <h1 className="lg:5xl text-2xl font-bold break-all sm:text-3xl sm:break-normal md:text-4xl xl:text-6xl 2xl:text-7xl">
+                  <span className="text-secondary">de motion designer à</span> développeur full
+                  stack
                 </h1>
               </MotionReveal>
             </div>
-            <div className="absolute inset-0 h-screen w-screen z-0">
+            <div className="absolute inset-0 z-0 h-screen w-screen">
               <CanvasReveal>
                 <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
                   <ambientLight intensity={4} color={"#ffffff"} />
@@ -104,19 +118,19 @@ export default function Home() {
           </section>
           {/* projets */}
           <section id="Projet" className={styles.section}>
-            <div className="relative z-10 h-2/3 w-full  flex flex-col items-center justify-between">
+            <div className="relative z-10 flex h-9/10 w-full flex-col items-center justify-between">
               <MotionReveal delay={0.1}>
-                <div className="text-center">
+                <div className="mb-5 text-center">
                   <h2 className={styles.title}>Mes projets</h2>
                 </div>
               </MotionReveal>
               <MotionReveal>
                 <ProjectGallery />
               </MotionReveal>
-              <div className="flex flex-row">
+              <div className="mt-5 flex flex-row">
                 <MotionReveal delay={0.5}>
                   <MotionButton
-                    text="Mon Github"
+                    text="Github"
                     link={"https://github.com/PierreCGdev?tab=repositories"}
                   />
                 </MotionReveal>
@@ -124,7 +138,7 @@ export default function Home() {
             </div>
           </section>
           <section id="A propos" className={styles.section}>
-            <div className="relative h-1/2 w-full  flex flex-col items-end justify-between">
+            <div className="relative flex h-2/3 w-full flex-col items-end justify-between md:h-5/6">
               <div className="flex flex-row text-right">
                 <div>
                   <MotionReveal delay={0.15}>
@@ -132,10 +146,8 @@ export default function Home() {
                   </MotionReveal>
                   <MotionReveal delay={0.3}>
                     <div>
-                      <h3 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mt-3">
-                        <span className="text-neutral-400">
-                          de motion designer à{" "}
-                        </span>
+                      <h3 className="mt-3 text-2xl font-bold sm:text-4xl md:text-5xl xl:text-6xl">
+                        <span className="text-neutral-400">de motion designer à </span>
                         développeur
                       </h3>
                     </div>
@@ -143,24 +155,31 @@ export default function Home() {
                 </div>
               </div>
               <MotionReveal delay={0.45}>
-                <p className="text-right text-md sm:text-xl md:text-2xl xl:text-3xl">
-                  Issu du monde du{" "}
-                  <span className="font-bold">motion design</span>, j’ai
-                  découvert <span className="font-bold">JavaScript</span> en
-                  créant des scripts pour automatiser des animations sur After
-                  Effects. Cette première immersion dans le code a été un vrai
-                  déclic : j’y ai retrouvé le même plaisir créatif qu’en
+                <p className="sm:text-md text-right text-sm md:text-lg xl:text-xl 2xl:text-2xl">
+                  Issu du monde du <span className="font-bold">motion design</span>, j’ai découvert{" "}
+                  <span className="font-bold">JavaScript</span> en créant des scripts pour
+                  automatiser des animations sur After Effects. Cette première immersion dans le
+                  code a été un vrai déclic : j’y ai retrouvé le même plaisir créatif qu’en
                   animation, mais avec une
                   <span className="font-bold"> logique</span> et une
-                  <span className="font-bold"> rigueur</span> qui m’ont tout de
-                  suite captivé. J’ai ensuite approfondi mes compétences avec{" "}
-                  <span className="font-bold">React</span>, et là, j’ai su que
-                  j’étais à ma place. Le développement web est devenu pour moi
-                  un terrain d’expression à part entière, mêlant technique et
-                  créativité.
+                  <span className="font-bold"> rigueur</span> qui m’ont tout de suite captivé. J’ai
+                  ensuite approfondi mes compétences avec <span className="font-bold">React</span>,
+                  et là, j’ai su que j’étais à ma place. Le développement web est devenu pour moi un
+                  terrain d’expression à part entière, mêlant technique et créativité.
                 </p>
               </MotionReveal>
-              <MotionReveal delay={0.6}>
+              <div className="flex flex-col items-end">
+                <MotionReveal className="flex flex-row">
+                  <IconsRender iconsName={techStack} delay={0.1} />
+                </MotionReveal>
+                <div className="mt-5">
+                  <MotionReveal>
+                    <IconsRender iconsName={designStack} delay={0.7} />
+                  </MotionReveal>
+                </div>
+              </div>
+
+              <MotionReveal delay={1.3}>
                 <MotionButton
                   text="LinkedIn"
                   link={"https://fr.linkedin.com/in/pierre-castanet-4b489493"}

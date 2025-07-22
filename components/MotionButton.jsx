@@ -1,7 +1,18 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
+import { useTheme } from "next-themes";
 
 const Button = ({ text, link }) => {
+  const { resolvedTheme: theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !theme) return null;
+
   const circleVariants = {
     initial: { scale: 0 },
     hover: {
@@ -10,22 +21,27 @@ const Button = ({ text, link }) => {
     },
   };
   const textVairants = {
-    initial: { color: "var(--color-primary)" },
-    hover: { color: "white" },
+    initial: {}, // pas besoin de color ici, elle est injectée via style
+    hover: { color: "#fff" }, // valeur explicite, animable
   };
   return (
     <motion.button
       initial="initial"
       whileHover="hover"
       onClick={() => window.open(link, "_blank")}
-      className=" relative flex overflow-hidden justify-center items-center cursor-pointer px-10 py-5 text-primary dark:text-primary-dark  text-sm sm:text-md md:text-lg xl:text-xl font-bold  border-2 rounded-full"
+      className="text-primary dark:text-primary-dark sm:text-md relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 px-5 py-3 text-sm font-bold md:px-7 md:py-4 md:text-lg xl:px-10 xl:py-5 xl:text-xl"
     >
-      <motion.div variants={textVairants} className="z-10">
+      <motion.div
+        variants={textVairants}
+        className={`z-10 ${
+          theme === "dark" ? "text-[var(--color-primary-dark)]" : "text-[var(--color-primary)]"
+        } text-sm sm:text-sm md:text-base xl:text-lg 2xl:text-xl`}
+      >
         {text}
       </motion.div>
 
       <motion.div
-        className="absolute w-[200%] aspect-square  rounded-full bg-primary dark:bg-primary-dark z-0  top-1/2 -left-5 -translate-y-1/2 -translate-x-1/2"
+        className="bg-primary dark:bg-primary-dark absolute top-1/2 -left-5 z-0 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 rounded-full"
         variants={circleVariants}
       ></motion.div>
     </motion.button>

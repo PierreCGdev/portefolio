@@ -4,10 +4,7 @@ import { useTheme } from "next-themes";
 
 const Button = ({ text, link }) => {
   const { resolvedTheme } = useTheme();
-  const color =
-    resolvedTheme === "dark"
-      ? "var(--color-primary-dark)"
-      : "var(--color-primary)";
+  const color = resolvedTheme === "dark" ? "var(--color-primary-dark)" : "var(--color-primary)";
   return (
     <div style={{ perspective: "800px" }}>
       <motion.button
@@ -27,7 +24,7 @@ const Button = ({ text, link }) => {
           transition: { duration: 0.3 },
         }}
         onClick={() => window.open(link, "_blank")}
-        className="flex justify-center items-center cursor-pointer px-10 py-5  text-sm sm:text-md md:text-lg xl:text-xl font-bold  border-2 rounded-full"
+        className="sm:text-md flex cursor-pointer items-center justify-center rounded-full border-2 px-10 py-5 text-sm font-bold md:text-lg xl:text-xl"
       >
         {text}
       </motion.button>

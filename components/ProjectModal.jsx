@@ -1,107 +1,76 @@
 import { motion } from "motion/react";
 import MotionReveal from "../components/motionReveal";
-import { TbBrandFramerMotion } from "react-icons/tb";
 import MotionButton from "../components/MotionButton";
-import {
-  SiExpress,
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiRedux,
-  SiThreedotjs,
-  SiMongodb,
-  SiTailwindcss,
-  SiJsonwebtokens,
-  SiNodedotjs,
-  SiExpo,
-  SiVercel,
-  SiGithub,
-} from "react-icons/si";
+import { IconsRender } from "../components/IconsRender";
 
 export function ProjectModal({ project, onClose }) {
-  const techIcons = {
-    "Next.js": SiNextdotjs,
-    TailwindCSS: SiTailwindcss,
-    "Framer Motion": TbBrandFramerMotion,
-    "Three.js": SiThreedotjs,
-    "Express.js": SiExpress,
-    React: SiReact,
-    "React Native": SiReact,
-    TypeScript: SiTypescript,
-    Redux: SiRedux,
-    MongoDB: SiMongodb,
-    JWT: SiJsonwebtokens,
-    "Node.js": SiNodedotjs,
-    Expo: SiExpo,
-    Vercel: SiVercel,
-  };
-
-  const iconsList = (techArray) => {
-    return techArray.map((tech) => {
-      const Icon = techIcons[tech];
-      return (
-        Icon && (
-          <div key={tech} title={tech}>
-            <Icon
-              className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 xl:h-9 xl:w-9 2xl:h-10 2xl:w-10"
-              aria-hidden="true"
-            />
-          </div>
-        )
-      );
-    });
-  };
-
   return (
     <div onClick={onClose}>
       {/* Overlay */}
       <motion.div
-        className="fixed inset-0 bg-neutral-50/60 dark:bg-neutral-800/60 z-40"
+        className="fixed inset-0 z-40 bg-neutral-50/60 dark:bg-neutral-800/60"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       />
 
       {/* Modale */}
-      <div className="fixed inset-0 flex justify-center items-center z-50 ">
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
         <motion.div
           layoutId={`card-container-${project.id}`}
-          className="w-3/5 h-3/5 bg-neutral-100 dark:bg-neutral-700 rounded-4xl overflow-hidden shadow-2xl/25 dark:shadow-2xl/75"
+          className="h-3/5 w-3/5 overflow-hidden rounded-4xl bg-neutral-100 shadow-2xl/25 dark:bg-neutral-700 dark:shadow-2xl/75"
           onClick={(e) => e.stopPropagation()} // Stop propagation pour ne pas fermer en cliquant dedans
         >
-          <motion.div className="flex justify-center items-center w-full h-1/4 sm:h-1/3 overflow-hidden">
+          <motion.div className="flex h-1/5 w-full items-center justify-center overflow-hidden sm:h-1/4">
             <motion.img
               className="w-full"
               layoutId={`card-image-${project.id}`}
-              src={project.img}
+              src={`/images/${project.img}`}
               alt={project.title}
             />
           </motion.div>
-          <motion.div className="p-5 sm:p-10 flex flex-col justify-between h-3/4 sm:h-2/3">
-            <motion.div>
-              <motion.h3
-                layoutId={`card-title-${project.id}`}
-                layout="position"
-                className=" text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl font-bold text-primary dark:text-primary-dark "
-              >
-                {project.title}
-              </motion.h3>
-              <MotionReveal>
-                <p className="text-sm  sm:text-md xl:text-xl 2xl:text-2xl mt-5">
-                  {project.description}
-                </p>
-              </MotionReveal>
-              <MotionReveal delay={0.4}>
-                <div className="hidden md:flex flex-wrap w-full gap-2 md:gap-5  mt-15">
-                  {iconsList(project.technologies)}
+          <div className="flex h-4/5 flex-row sm:h-3/4">
+            <div className="flex w-1/5">
+              {project.video && (
+                <div className="w-72 hidden xl:flex justify-center items-start ml-10 mt-10">
+                  <iframe
+                    src={`${project.video}?autoplay=1&autopause=0&background=0&playsinline=1`}
+                    className="rounded-xl aspect-9/16 "
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    title={project.title}
+                  />
                 </div>
-              </MotionReveal>
-            </motion.div>
+              )}
+            </div>
+            <motion.div className="flex flex-col justify-between p-5 sm:p-10">
+              <motion.div>
+                <motion.h3
+                  layoutId={`card-title-${project.id}`}
+                  layout="position"
+                  className="lg:5xl text-primary dark:text-primary-dark text-2xl font-bold break-all sm:text-3xl sm:break-normal md:text-4xl xl:text-6xl 2xl:text-7xl"
+                >
+                  {project.title}
+                </motion.h3>
+                <MotionReveal>
+                  <p className="sm:text-md md:text-md mt-5 text-sm xl:text-lg 2xl:text-xl">
+                    {project.description}
+                  </p>
+                </MotionReveal>
 
-            <motion.div className="flex  justify-center lg:justify-end w-full gap-2 md:gap-5  ">
-              <MotionButton text="visiter le site" />
+                <div className="mt-7">
+                  <IconsRender iconsName={project.technologies} delay={0.4} />
+                </div>
+              </motion.div>
+              <motion.div className="mt-3 flex w-full justify-center lg:justify-end">
+                {project.link && (
+                  <MotionButton
+                    text={project.video ? "lien Expo" : "visiter le site"}
+                    link={project.link}
+                  />
+                )}
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>

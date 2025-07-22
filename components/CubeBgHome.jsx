@@ -65,8 +65,8 @@ export default function CubeBackground() {
 
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
   const hoverColor = theme === "light" ? "#aaaaaa" : "#4d4d4d";
-  const gridX = Math.floor(size.width / 165);
-  const gridY = Math.floor(size.height / 170);
+  const gridX = Math.floor(size.width / 130);
+  const gridY = Math.floor(size.height / 150);
   const cubeSpacing = 1;
 
   const [hoveredPosition, setHoveredPosition] = useState(null);
