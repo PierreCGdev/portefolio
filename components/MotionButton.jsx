@@ -21,21 +21,21 @@ const Button = ({ text, link }) => {
     },
   };
   const textVairants = {
-    initial: {}, // pas besoin de color ici, elle est injectée via style
-    hover: { color: "#fff" }, // valeur explicite, animable
+    initial: {},
+    hover: { color: "#fff" },
   };
   return (
     <motion.button
       initial="initial"
       whileHover="hover"
       onClick={() => window.open(link, "_blank")}
-      className="text-primary dark:text-primary-dark sm:text-md relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 px-5 py-3 text-sm font-bold md:px-7 md:py-4 md:text-lg xl:px-10 xl:py-5 xl:text-xl"
+      className="text-primary dark:text-primary-dark sm:text-md relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 px-4 py-3 text-sm font-bold md:px-6 md:py-3 lg:px-7 lg:py-4 md:text-lg xl:px-10 xl:py-5 xl:text-xl"
     >
       <motion.div
         variants={textVairants}
         className={`z-10 ${
           theme === "dark" ? "text-[var(--color-primary-dark)]" : "text-[var(--color-primary)]"
-        } text-sm sm:text-sm md:text-base xl:text-lg 2xl:text-xl`}
+        } text-sm sm:text-sm md:text-md xl:text-lg 2xl:text-xl`}
       >
         {text}
       </motion.div>

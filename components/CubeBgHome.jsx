@@ -5,13 +5,7 @@ import { useTheme } from "next-themes";
 import * as THREE from "three";
 
 // Cube individuel avec effet falloff
-function Cube({
-  position,
-  cubeColor,
-  hoverColor,
-  hoveredPosition,
-  setHoveredPosition,
-}) {
+function Cube({ position, cubeColor, hoverColor, hoveredPosition, setHoveredPosition }) {
   const ref = useRef();
 
   const baseZ = position[2];
@@ -49,7 +43,6 @@ function Cube({
       castShadow
       receiveShadow
       onPointerOver={() => setHoveredPosition(position)}
-      // onPointerOut={() => setHoveredPosition(null)}
     >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={cubeColor} />
@@ -65,12 +58,13 @@ export default function CubeBackground() {
 
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
   const hoverColor = theme === "light" ? "#aaaaaa" : "#4d4d4d";
+  // Calcul de la grille de cubes en fonction de la taille de la fenêtre
   const gridX = Math.floor(size.width / 130);
   const gridY = Math.floor(size.height / 150);
   const cubeSpacing = 1;
 
   const [hoveredPosition, setHoveredPosition] = useState(null);
-
+  // Génération des positions des cubes et mémorisation avec useMemo
   const cubePositions = useMemo(() => {
     const list = [];
     for (let x = 0; x < gridX; x++) {

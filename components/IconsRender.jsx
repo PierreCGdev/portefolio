@@ -57,7 +57,7 @@ export function IconsRender({ iconsName, delay }) {
           <div key={icon} title={icon}>
             <MotionReveal delay={delay + i * 0.1} rotation={120}>
               <Icon
-                className="w-3 h-3 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:h-8 xl:w-8 2xl:h-9 2xl:w-9"
+                className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:h-7 xl:w-7 2xl:h-9 2xl:w-9"
                 aria-hidden="true"
                 alt={icon}
               />
@@ -69,8 +69,6 @@ export function IconsRender({ iconsName, delay }) {
   };
 
   return (
-    <div className="hidden md:flex flex-wrap w-full gap-2 md:gap-5">
-      {iconsList(iconsName)}
-    </div>
+    <div className="hidden md:flex flex-wrap w-full gap-2 md:gap-5">{iconsList(iconsName)}</div>
   );
 }
