@@ -91,7 +91,7 @@ export default function Home() {
                 <h1 className={styles.title}>Pierre Castanet</h1>
               </MotionReveal>
               <MotionReveal delay={0.25}>
-                <h1 className="lg:5xl text-2xl font-bold break-all sm:text-3xl sm:break-normal md:text-4xl xl:text-6xl 2xl:text-7xl">
+                <h1 className=" font-bold break-all sm:break-normal text-xl sm:text-2xl   md:text-4xl xl:text-5xl 2xl:text-6xl">
                   <span className="text-secondary">de motion designer à</span> développeur full
                   stack
                 </h1>
@@ -140,13 +140,13 @@ export default function Home() {
           <section id="A propos" className={styles.section}>
             <div className="relative flex h-2/3 w-full flex-col items-end justify-between md:h-5/6">
               <div className="flex flex-row text-right">
-                <div>
+                <div className="mb-3">
                   <MotionReveal delay={0.15}>
-                    <h2 className={styles.title}>mon parcours</h2>
+                    <h2 className={styles.title}>à propos</h2>
                   </MotionReveal>
                   <MotionReveal delay={0.3}>
                     <div>
-                      <h3 className="mt-3 text-2xl font-bold sm:text-4xl md:text-5xl xl:text-6xl">
+                      <h3 className="mt-3 text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl">
                         <span className="text-neutral-400">de motion designer à </span>
                         développeur
                       </h3>
@@ -155,7 +155,7 @@ export default function Home() {
                 </div>
               </div>
               <MotionReveal delay={0.45}>
-                <p className="sm:text-md text-right text-sm md:text-lg xl:text-xl 2xl:text-2xl">
+                <p className="text-justify sm:text-md md:text-right text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">
                   Issu du monde du <span className="font-bold">motion design</span>, j’ai découvert{" "}
                   <span className="font-bold">JavaScript</span> en créant des scripts pour
                   automatiser des animations sur After Effects. Cette première immersion dans le
@@ -168,7 +168,7 @@ export default function Home() {
                   terrain d’expression à part entière, mêlant technique et créativité.
                 </p>
               </MotionReveal>
-              <div className="flex flex-col items-end">
+              <div className="flex flex-col items-end my-5">
                 <MotionReveal className="flex flex-row">
                   <IconsRender iconsName={techStack} delay={0.1} />
                 </MotionReveal>
