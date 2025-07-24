@@ -1,4 +1,5 @@
 import { Open_Sans, Quicksand } from "next/font/google";
+import ThemeProvider from "../components/ThemeProvider";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -22,7 +23,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${openSans.variable} ${quicksand.variable} bg-neutral-50 text-neutral-800 antialiased dark:bg-neutral-800 dark:text-neutral-50`}
       >
-        <main>{children}</main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main>{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );

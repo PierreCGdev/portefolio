@@ -31,11 +31,11 @@ export function ProjectModal({ project, onClose }) {
           </motion.div>
           <div className="flex h-4/5 flex-row sm:h-3/4">
             {project.video && (
-              <div className="flex w-1/5">
-                <div className="w-72 hidden xl:flex justify-center items-start ml-10 mt-10">
+              <div className="hidden xl:flex justify-center items-start ml-10 mt-10">
+                <div className="w-40 md:w-45 2xl:w-50 aspect-[9/16] relative">
                   <iframe
                     src={`${project.video}?autoplay=1&autopause=0&background=0&playsinline=1`}
-                    className="rounded-xl aspect-9/16 "
+                    className="absolute top-0 left-0 w-full h-full rounded-xl"
                     allow="autoplay; fullscreen; picture-in-picture"
                     title={project.title}
                   />

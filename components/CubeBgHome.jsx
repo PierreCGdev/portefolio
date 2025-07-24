@@ -1,4 +1,3 @@
-"use client";
 import { useRef, useMemo, useState } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useTheme } from "next-themes";

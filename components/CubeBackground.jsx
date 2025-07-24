@@ -1,17 +1,10 @@
-"use client";
 import { useRef, useMemo, useState } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
 
 // Cube individuel avec effet falloff
-function Cube({
-  position,
-  cubeColor,
-  hoverColor,
-  hoveredPosition,
-  setHoveredPosition,
-}) {
+function Cube({ position, cubeColor, hoverColor, hoveredPosition, setHoveredPosition }) {
   const ref = useRef();
 
   const baseZ = position[2];

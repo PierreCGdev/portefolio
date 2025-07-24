@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "motion/react";
 import { LuMenu, LuX } from "react-icons/lu";

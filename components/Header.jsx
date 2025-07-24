@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { LuMenu } from "react-icons/lu";
 import ThemeToggle from "./ThemeToggle";

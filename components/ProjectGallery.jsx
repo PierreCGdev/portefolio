@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { AnimatePresence, LayoutGroup } from "motion/react";
 import { ProjectCard } from "./ProjectCard";
