@@ -12,7 +12,7 @@ export default function ProjectGallery() {
     <LayoutGroup>
       <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-9 xl:gap-10 2xl:gap-10  justify-center">
         {data.map((project, i) => (
-          <MotionReveal delay={(i + 1) * 0.25} key={project.id}>
+          <MotionReveal delay={(i + 1) * 0.15} key={project.id}>
             <ProjectCard {...project} onClick={() => setSelectedId(project.id)} />
           </MotionReveal>
         ))}

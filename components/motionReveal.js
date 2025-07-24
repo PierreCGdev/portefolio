@@ -12,7 +12,7 @@ export default function MotionReveal({ children, delay = 0.25, rotation = 0 }) {
 
           transition: {
             duration: 0.4,
-            delay: delay + 0.1,
+            delay: delay,
             ease: "easeInOut",
           },
         },
