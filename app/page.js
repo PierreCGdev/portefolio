@@ -82,12 +82,15 @@ export default function Home() {
         {/* home */}
         <section id="Home" className={styles.section} style={{ pointerEvents: "none" }}>
           <div className="relative z-10 flex h-full w-full flex-col items-start justify-center">
-            <MotionReveal delay={0.1}>
+            <MotionReveal delay={0.2}>
               <h1 className={styles.title}>Pierre Castanet</h1>
             </MotionReveal>
-            <MotionReveal delay={0.25}>
+            <MotionReveal delay={0.4}>
               <h1 className=" font-bold break-all sm:break-normal text-xl sm:text-2xl   md:text-4xl xl:text-5xl 2xl:text-6xl">
-                <span className="text-secondary">de motion designer à</span> développeur full stack
+                <span className="text-secondary dark:text-secondary-dark">
+                  de motion designer à
+                </span>{" "}
+                développeur full stack
               </h1>
             </MotionReveal>
           </div>
@@ -122,7 +125,7 @@ export default function Home() {
               <ProjectGallery />
             </MotionReveal>
             <div className="mt-5 flex flex-row">
-              <MotionReveal delay={0.5}>
+              <MotionReveal delay={0.4}>
                 <MotionButton
                   text="Github"
                   link={"https://github.com/PierreCGdev?tab=repositories"}
@@ -141,7 +144,9 @@ export default function Home() {
                 <MotionReveal delay={0.3}>
                   <div>
                     <h3 className="mt-3 text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl">
-                      <span className="text-neutral-400">de motion designer à </span>
+                      <span className="text-secondary dark:text-secondary-dark">
+                        de motion designer à{" "}
+                      </span>
                       développeur
                     </h3>
                   </div>
@@ -163,7 +168,7 @@ export default function Home() {
             </MotionReveal>
             <div className="flex flex-col items-end my-5">
               <MotionReveal className="flex flex-row">
-                <IconsRender iconsName={techStack} delay={0.1} />
+                <IconsRender iconsName={techStack} delay={0.4} />
               </MotionReveal>
               <div className="mt-5">
                 <MotionReveal>
@@ -172,7 +177,7 @@ export default function Home() {
               </div>
             </div>
 
-            <MotionReveal delay={1.3}>
+            <MotionReveal delay={1}>
               <MotionButton
                 text="LinkedIn"
                 link={"https://fr.linkedin.com/in/pierre-castanet-4b489493"}
