@@ -1,6 +1,5 @@
-import { RefreshCw } from "lucide-react";
 import { useInView } from "motion/react";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 export default function CanvasReveal({ children }) {
   const ref = useRef(null);

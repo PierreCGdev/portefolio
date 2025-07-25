@@ -1,10 +1,12 @@
 "use client";
+import { Canvas } from "@react-three/fiber";
+import { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import CubeBgHome from "../components/CubeBgHome";
-import { useState, useEffect, useRef } from "react";
+import CubeBgEnd from "../components/CubeBgEnd";
+import CubeBgMid from "../components/CubeBgMid";
 import MotionReveal from "../components/motionReveal";
 import CanvasReveal from "../components/CanvasReveal";
-import { Canvas } from "@react-three/fiber";
 import ProjectGallery from "../components/ProjectGallery";
 import MotionButton from "../components/MotionButton";
 import { IconsRender } from "../components/IconsRender";
@@ -79,6 +81,56 @@ export default function Home() {
     <div>
       <Header sections={sections} activeSection={activeSection} />
       <main className="relative">
+        <div className="absolute inset-0 z-0 h-screen w-screen">
+          <div className="relative h-screen w-screen">
+            <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
+              <ambientLight intensity={4} color={"#ffffff"} />
+              <directionalLight
+                color={"#ffffff"}
+                position={[0, 10, 10]}
+                intensity={4}
+                castShadow
+                shadow-mapSize-width={2048}
+                shadow-mapSize-height={2048}
+                shadow-camera-left={-20}
+                shadow-camera-right={20}
+              />
+              <CubeBgHome />
+            </Canvas>
+          </div>
+          <div className="relative h-screen w-screen">
+            <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
+              <ambientLight intensity={4} color={"#ffffff"} />
+              <directionalLight
+                color={"#ffffff"}
+                position={[0, 10, 10]}
+                intensity={4}
+                castShadow
+                shadow-mapSize-width={2048}
+                shadow-mapSize-height={2048}
+                shadow-camera-left={-20}
+                shadow-camera-right={20}
+              />
+              <CubeBgMid yScroll={yScroll} screenNb={3} />
+            </Canvas>
+          </div>
+          <div className="relative h-screen w-screen">
+            <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
+              <ambientLight intensity={4} color={"#ffffff"} />
+              <directionalLight
+                color={"#ffffff"}
+                position={[0, 10, 10]}
+                intensity={4}
+                castShadow
+                shadow-mapSize-width={2048}
+                shadow-mapSize-height={2048}
+                shadow-camera-left={-20}
+                shadow-camera-right={20}
+              />
+              <CubeBgEnd yScroll={yScroll} screenNb={3} />
+            </Canvas>
+          </div>
+        </div>
         {/* home */}
         <section id="Home" className={styles.section} style={{ pointerEvents: "none" }}>
           <div className="relative z-10 flex h-full w-full flex-col items-start justify-center">
@@ -93,24 +145,6 @@ export default function Home() {
                 développeur full stack
               </h1>
             </MotionReveal>
-          </div>
-          <div className="absolute inset-0 z-0 h-screen w-screen">
-            <CanvasReveal>
-              <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
-                <ambientLight intensity={4} color={"#ffffff"} />
-                <directionalLight
-                  color={"#ffffff"}
-                  position={[0, 10, 10]}
-                  intensity={4}
-                  castShadow
-                  shadow-mapSize-width={2048}
-                  shadow-mapSize-height={2048}
-                  shadow-camera-left={-20}
-                  shadow-camera-right={20}
-                />
-                <CubeBgHome />
-              </Canvas>
-            </CanvasReveal>
           </div>
         </section>
         {/* projets */}
