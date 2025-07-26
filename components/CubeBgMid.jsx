@@ -32,17 +32,20 @@ function Cube({ position, screenScroll, gridY }) {
 }
 
 // Grille de cubes
-export default function CubeBgMid({ yScroll }) {
+export default function CubeBackground({ yScroll }) {
   const groupRef = useRef();
 
   const { size } = useThree();
   // début du scroll avant l'affichage du composant
-  const startScroll = size.height * 1.3;
+  const startScroll = size.height * 0.5;
+  const middleScroll = size.height * 1 - startScroll;
 
-  const scrollCurrent = yScroll.current - startScroll < 0 ? 0 : yScroll.current - startScroll;
-  // calcul de la hauteur du scroll en fonction de la position actuelle du composant dans page.js
-  const gapScreen = (scrollCurrent / size.height) * 1.4;
+  const endScroll = size.height * 1.5 - middleScroll;
 
+  // calcul de la hauteur du scroll en fonction de la position actuelle du composant dans page.js (ne pas dépasser 1)
+  const currentScroll = (yScroll.current - startScroll) / middleScroll;
+  const test = currentScroll > 1 ? 1 : currentScroll < 0 ? 0 : currentScroll;
+  console.log(test);
   // Calcul de la grille de cubes en fonction de la taille de la fenêtre
   const gridX = Math.floor(size.width / 130);
   const gridY = Math.floor(size.height / 150);
@@ -64,7 +67,7 @@ export default function CubeBgMid({ yScroll }) {
   return (
     <group ref={groupRef} position={[0, 0, 0]}>
       {cubePositions.map((position, idx) => (
-        <Cube key={idx} position={position} screenScroll={gapScreen} gridY={gridY} />
+        <Cube key={idx} position={position} screenScroll={currentScroll} gridY={gridY} />
       ))}
     </group>
   );
