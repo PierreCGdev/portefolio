@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import MotionReveal from "../components/motionReveal";
 import MotionButton from "../components/MotionButton";
 import { IconsRender } from "../components/IconsRender";
+import { LuX } from "react-icons/lu";
 
 export function ProjectModal({ project, onClose }) {
   return (
@@ -21,7 +22,14 @@ export function ProjectModal({ project, onClose }) {
           className="h-4/6 w-4/5  md:w-3/5  lg:h-3/5 lg:w-3/5 overflow-hidden rounded-4xl bg-neutral-100 shadow-2xl/25 dark:bg-neutral-700 dark:shadow-2xl/75"
           onClick={(e) => e.stopPropagation()} // Stop propagation pour ne pas fermer en cliquant dedans
         >
-          <motion.div className="flex h-1/5 w-full items-center justify-center overflow-hidden sm:h-1/4">
+          <motion.div className="relative flex h-1/5 w-full items-center justify-center overflow-hidden sm:h-1/4">
+            <button
+              className="absolute top-6 right-7 z-10 text-primary bg-transparent border-none outline-none"
+              onClick={onClose}
+            >
+              <LuX size={30} />
+            </button>
+
             <motion.img
               className="w-full"
               layoutId={`card-image-${project.id}`}

@@ -19,10 +19,10 @@ export function ProjectCard({ id, title, img, onClick }) {
           className="absolute inset-0 w-full h-2/3 object-cover  "
         />
 
-        {/* Overlay sombre (optionnel) */}
+        {/* Overlay sombre  */}
         <div className="absolute inset-0 h-2/3 bg-neutral-50/50 dark:bg-neutral-800/50  " />
 
-        {/* Titre au-dessus */}
+        {/* Titre  */}
         <motion.h3
           layoutId={`card-title-${id}`}
           layout="position"
