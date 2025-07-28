@@ -82,7 +82,7 @@ export default function Home() {
   return (
     <div>
       <Header sections={sections} activeSection={activeSection} />
-      <main className="relative">
+      <main className="relative overflow-hidden">
         <div className="absolute inset-0 z-0 h-screen w-screen">
           <div className="relative h-screen w-screen">
             <CubeCanvas>
