@@ -8,19 +8,22 @@ function Cube({ position, screenScroll, gridY }) {
   const ref = useRef();
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
   // random pour le rotation et position
-  const speedFactor = useRef(0.3 + Math.random() * 0.7).current; // ∈ [0.3, 1)
+  const speedFactor = useRef(0.3 + Math.random() * 0.7).current;
   useFrame(() => {
     if (!ref.current) return;
     const targetRotation = screenScroll * (Math.PI / 2);
+    const targetPosZ = 4 * (position[1] + (gridY - 1) / 2);
+    const targetPosY = 4 * (position[1] - (gridY - 1) / 4);
 
     // Calcul de la position de base en fonction du scroll et de la grille
-    const baseZ = position[2] + 8 * (position[1] + (gridY - 1) / 2) * screenScroll;
-    const baseY = position[1] - (position[1] - (gridY - 1) / 4) * screenScroll;
+    const baseZ = position[2] + targetPosZ * screenScroll;
+    const baseY = position[1] - targetPosY * screenScroll;
     ref.current.rotation.x += (targetRotation - ref.current.rotation.x) * (0.05 * speedFactor);
-    ref.current.position.z +=
-      (baseZ - ref.current.position.z - 8 * (position[1] + (gridY - 1) / 2)) * (0.05 * speedFactor);
-    ref.current.position.y +=
-      (baseY - ref.current.position.y + (position[1] - (gridY - 1) / 4)) * (0.05 * speedFactor);
+    ref.current.position.z += (baseZ - ref.current.position.z - targetPosZ) * (0.05 * speedFactor);
+    ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * (0.05 * speedFactor);
+    ref.current.scale.x += (screenScroll - ref.current.scale.x) * 0.05 * speedFactor;
+    ref.current.scale.y += (screenScroll - ref.current.scale.y) * 0.05 * speedFactor;
+    ref.current.scale.z += (screenScroll - ref.current.scale.z) * 0.05 * speedFactor;
   });
 
   return (
@@ -32,7 +35,7 @@ function Cube({ position, screenScroll, gridY }) {
 }
 
 // Grille de cubes
-export default function CubeBackground({ yScroll }) {
+export default function CubeBackground({ yScroll, widthDivier = 130, heightDivider = 150 }) {
   const groupRef = useRef();
 
   const { size } = useThree();
@@ -47,8 +50,8 @@ export default function CubeBackground({ yScroll }) {
         ? 0
         : (yScroll.current - startScroll) / totalScroll;
   // Calcul de la grille de cubes en fonction de la taille de la fenêtre
-  const gridX = Math.floor(size.width / 130);
-  const gridY = Math.floor(size.height / 150);
+  const gridX = Math.floor(size.width / widthDivier);
+  const gridY = Math.floor(size.height / heightDivider);
   const cubeSpacing = 1;
 
   // Génération des positions des cubes et mémorisation avec useMemo

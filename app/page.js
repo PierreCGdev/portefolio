@@ -6,7 +6,6 @@ import CubeBgHome from "../components/CubeBgHome";
 import CubeBgEnd from "../components/CubeBgEnd";
 import CubeBgMid from "../components/CubeBgMid";
 import MotionReveal from "../components/motionReveal";
-import CanvasReveal from "../components/CanvasReveal";
 import ProjectGallery from "../components/ProjectGallery";
 import MotionButton from "../components/MotionButton";
 import { IconsRender } from "../components/IconsRender";
@@ -16,10 +15,12 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("Home");
 
   const yScroll = useRef(0);
+  const yScale = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       yScroll.current = window.scrollY;
+      yScale.current = window.innerHeight;
       const scrollPos = window.scrollY + window.innerHeight / 2;
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -77,6 +78,9 @@ export default function Home() {
       "text-2xl sm:text-3xl md:text-4xl lg:5xl xl:text-6xl 2xl:text-7xl break-all sm:break-normal  font-bold text-primary dark:text-primary-dark ",
   };
 
+  const widthDivier = 120;
+  const heightDivider = 150;
+
   return (
     <div>
       <Header sections={sections} activeSection={activeSection} />
@@ -95,7 +99,7 @@ export default function Home() {
                 shadow-camera-left={-20}
                 shadow-camera-right={20}
               />
-              <CubeBgHome />
+              <CubeBgHome widthDivier={widthDivier} heightDivider={heightDivider} />
             </Canvas>
           </div>
           <div className="relative h-screen w-screen">
@@ -111,7 +115,11 @@ export default function Home() {
                 shadow-camera-left={-20}
                 shadow-camera-right={20}
               />
-              <CubeBgMid yScroll={yScroll} screenNb={3} />
+              <CubeBgMid
+                yScroll={yScroll}
+                widthDivier={widthDivier}
+                heightDivider={heightDivider}
+              />
             </Canvas>
           </div>
           <div className="relative h-screen w-screen">
@@ -127,7 +135,11 @@ export default function Home() {
                 shadow-camera-left={-20}
                 shadow-camera-right={20}
               />
-              <CubeBgEnd yScroll={yScroll} screenNb={3} />
+              <CubeBgEnd
+                yScroll={yScroll}
+                widthDivier={widthDivier}
+                heightDivider={heightDivider}
+              />
             </Canvas>
           </div>
         </div>

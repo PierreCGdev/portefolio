@@ -4,6 +4,17 @@ import { useTheme } from "next-themes";
 
 // Cube individuel avec un effet de position/rotation basé sur le scroll avec un random speed factor
 function Cube({ position, screenScroll, gridY }) {
+  // le scroll pour que de 0 à 0.7 on scale de 0 à 1, de 0.7 à 1.3 c'est égal à 1, et de 1.3 à 2 on scale de 1 à 0
+  const screenScrollCtrl =
+    screenScroll <= 0
+      ? 0
+      : screenScroll <= 0.7
+        ? screenScroll / 0.7
+        : screenScroll <= 1.3
+          ? 1
+          : screenScroll <= 2
+            ? 1 - (screenScroll - 1.3) / 0.7
+            : 0;
   const { theme } = useTheme();
   const ref = useRef();
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
@@ -11,16 +22,27 @@ function Cube({ position, screenScroll, gridY }) {
   const speedFactor = useRef(0.3 + Math.random() * 0.7).current; // ∈ [0.3, 1)
   useFrame(() => {
     if (!ref.current) return;
-    const targetRotation = screenScroll * (Math.PI / 2);
+    const targetRotation = screenScrollCtrl * (Math.PI / 2);
+    const targetPosY =
+      screenScroll > 1 ? 1 * (position[1] + (gridY - 1) / 4) : 1 * (position[1] - (gridY - 1) / 4);
+
+    const targetPosZ =
+      screenScroll > 1
+        ? 1.5 * (position[2] + (gridY - 1) / 4)
+        : 1.5 * (position[2] - (gridY - 1) / 4);
 
     // Calcul de la position de base en fonction du scroll et de la grille
-    const baseZ = position[2] + 8 * (position[1] + (gridY - 1) / 2) * screenScroll;
-    const baseY = position[1] - (position[1] - (gridY - 1) / 4) * screenScroll;
+    const baseZ = position[2] + targetPosZ * screenScrollCtrl;
+    const baseY = position[1] - targetPosY * screenScrollCtrl;
     ref.current.rotation.x += (targetRotation - ref.current.rotation.x) * (0.05 * speedFactor);
-    ref.current.position.z +=
-      (baseZ - ref.current.position.z - 8 * (position[1] + (gridY - 1) / 2)) * (0.05 * speedFactor);
-    ref.current.position.y +=
-      (baseY - ref.current.position.y + (position[1] - (gridY - 1) / 4)) * (0.05 * speedFactor);
+    ref.current.position.z += (baseZ - ref.current.position.z - targetPosZ) * (0.05 * speedFactor);
+    ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * (0.05 * speedFactor);
+    const targetScale = screenScrollCtrl;
+    const speed = 0.05 * speedFactor;
+
+    ref.current.scale.x += (targetScale - ref.current.scale.x) * speed;
+    ref.current.scale.y += (targetScale - ref.current.scale.y) * speed;
+    ref.current.scale.z += (targetScale - ref.current.scale.z) * speed;
   });
 
   return (
@@ -32,7 +54,7 @@ function Cube({ position, screenScroll, gridY }) {
 }
 
 // Grille de cubes
-export default function CubeBackground({ yScroll }) {
+export default function CubeBackground({ yScroll, widthDivier = 130, heightDivider = 150 }) {
   const groupRef = useRef();
 
   const { size } = useThree();
@@ -44,11 +66,10 @@ export default function CubeBackground({ yScroll }) {
 
   // calcul de la hauteur du scroll en fonction de la position actuelle du composant dans page.js (ne pas dépasser 1)
   const currentScroll = (yScroll.current - startScroll) / middleScroll;
-  const test = currentScroll > 1 ? 1 : currentScroll < 0 ? 0 : currentScroll;
-  console.log(test);
+
   // Calcul de la grille de cubes en fonction de la taille de la fenêtre
-  const gridX = Math.floor(size.width / 130);
-  const gridY = Math.floor(size.height / 150);
+  const gridX = Math.floor(size.width / widthDivier);
+  const gridY = Math.floor(size.height / heightDivider);
   const cubeSpacing = 1;
 
   // Génération des positions des cubes et mémorisation avec useMemo

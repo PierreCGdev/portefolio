@@ -50,7 +50,7 @@ function Cube({ position, cubeColor, hoverColor, hoveredPosition, setHoveredPosi
 }
 
 // Grille de cubes
-export default function CubeBackground() {
+export default function CubeBackground({ yScroll, widthDivier = 130, heightDivider = 150 }) {
   const groupRef = useRef();
   const { theme } = useTheme();
   const { size } = useThree();
@@ -58,8 +58,8 @@ export default function CubeBackground() {
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
   const hoverColor = theme === "light" ? "#aaaaaa" : "#4d4d4d";
   // Calcul de la grille de cubes en fonction de la taille de la fenêtre
-  const gridX = Math.floor(size.width / 130);
-  const gridY = Math.floor(size.height / 150);
+  const gridX = Math.floor(size.width / widthDivier);
+  const gridY = Math.floor(size.height / heightDivider);
   const cubeSpacing = 1;
 
   const [hoveredPosition, setHoveredPosition] = useState(null);
