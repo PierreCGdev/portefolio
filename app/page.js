@@ -1,10 +1,9 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
 import { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
+import CubeCanvas from "../components/CubeCanvas";
 import CubeBgHome from "../components/CubeBgHome";
 import CubeBgEnd from "../components/CubeBgEnd";
-import CubeBgMid from "../components/CubeBgMid";
 import MotionReveal from "../components/motionReveal";
 import ProjectGallery from "../components/ProjectGallery";
 import MotionButton from "../components/MotionButton";
@@ -73,12 +72,11 @@ export default function Home() {
   const styles = {
     section:
       "h-screen w-screen flex flex-col items-center justify-center p-17 sm:p-25 md:p-33 lg:p-40 xl:p-45 2xl:p-70",
-    sectionContent: "relative z-10 h-full w-full flex flex-col items-center justify-center",
     title:
       "text-2xl sm:text-3xl md:text-4xl lg:5xl xl:text-6xl 2xl:text-7xl break-all sm:break-normal  font-bold text-primary dark:text-primary-dark ",
   };
 
-  const widthDivier = 120;
+  const widthDivier = 130;
   const heightDivider = 150;
 
   return (
@@ -87,64 +85,23 @@ export default function Home() {
       <main className="relative">
         <div className="absolute inset-0 z-0 h-screen w-screen">
           <div className="relative h-screen w-screen">
-            <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
-              <ambientLight intensity={4} color={"#ffffff"} />
-              <directionalLight
-                color={"#ffffff"}
-                position={[0, 10, 10]}
-                intensity={4}
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
-                shadow-camera-left={-20}
-                shadow-camera-right={20}
-              />
+            <CubeCanvas>
               <CubeBgHome
                 yScroll={yScroll}
                 widthDivier={widthDivier}
                 heightDivider={heightDivider}
               />
-            </Canvas>
+            </CubeCanvas>
           </div>
+          <div className="relative h-screen w-screen"></div>
           <div className="relative h-screen w-screen">
-            <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
-              <ambientLight intensity={4} color={"#ffffff"} />
-              <directionalLight
-                color={"#ffffff"}
-                position={[0, 10, 10]}
-                intensity={4}
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
-                shadow-camera-left={-20}
-                shadow-camera-right={20}
-              />
-              {/* <CubeBgMid
-                yScroll={yScroll}
-                widthDivier={widthDivier}
-                heightDivider={heightDivider}
-              /> */}
-            </Canvas>
-          </div>
-          <div className="relative h-screen w-screen">
-            <Canvas shadows camera={{ position: [0, 0, 29], fov: 22 }}>
-              <ambientLight intensity={4} color={"#ffffff"} />
-              <directionalLight
-                color={"#ffffff"}
-                position={[0, 10, 10]}
-                intensity={4}
-                castShadow
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
-                shadow-camera-left={-20}
-                shadow-camera-right={20}
-              />
+            <CubeCanvas>
               <CubeBgEnd
                 yScroll={yScroll}
                 widthDivier={widthDivier}
                 heightDivider={heightDivider}
               />
-            </Canvas>
+            </CubeCanvas>
           </div>
         </div>
         {/* home */}
@@ -235,15 +192,7 @@ export default function Home() {
             </MotionReveal>
           </div>
         </section>
-
-        {/* <section
-            id="Outil"
-            className="h-screen w-screen flex items-center justify-center"
-          >
-            <h1>Écran 3</h1>
-          </section> */}
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }

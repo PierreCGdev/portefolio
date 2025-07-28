@@ -7,17 +7,18 @@ function Cube({ position, screenScroll, gridY }) {
   const { theme } = useTheme();
   const ref = useRef();
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
+  const screenScrollCtrl = Math.max(0, Math.min(1, screenScroll));
   // random pour le rotation et position
   const speedFactor = useRef(0.3 + Math.random() * 0.7).current;
   useFrame(() => {
     if (!ref.current) return;
-    const targetRotation = screenScroll * (Math.PI / 2);
-    const targetPosZ = position[1] + (gridY - 1) / 2;
-    const targetPosY = 2.35 * (position[1] - (gridY - 1) / 4);
-    const targetScale = 0.7 + screenScroll * 0.3;
+    const targetRotation = screenScrollCtrl * (Math.PI / 2);
+    const targetPosZ = 1.5 * (position[1] + (gridY - 1) / 2);
+    const targetPosY = 0.3 * (position[1] - (gridY - 1) / 4);
+    const targetScale = 0.7 + screenScrollCtrl * 0.3;
     // Calcul de la position de base en fonction du scroll et de la grille
-    const baseZ = position[2] + targetPosZ * screenScroll;
-    const baseY = position[1] - targetPosY * screenScroll;
+    const baseZ = position[2] + targetPosZ * screenScrollCtrl;
+    const baseY = position[1] - targetPosY * screenScrollCtrl;
     ref.current.rotation.x += (targetRotation - ref.current.rotation.x) * (0.05 * speedFactor);
     ref.current.position.z += (baseZ - ref.current.position.z - targetPosZ) * (0.05 * speedFactor);
     ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * (0.05 * speedFactor);
@@ -40,7 +41,7 @@ export default function CubeBackground({ yScroll, widthDivier = 130, heightDivid
 
   const { size } = useThree();
   // début du scroll avant l'affichage du composant
-  const startScroll = size.height * 1.3;
+  const startScroll = size.height * 1.1;
   const totalScroll = size.height * 2 - startScroll;
   // calcul de la hauteur du scroll en fonction de la position actuelle du composant dans page.js (ne pas dépasser 1)
   const currentScroll =

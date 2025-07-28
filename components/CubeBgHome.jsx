@@ -3,7 +3,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
 
-// Cube individuel avec effet falloff
+// Cube individuel avec effet falloff en hover et animation au scroll
 function Cube({
   position,
   cubeColor,
@@ -33,9 +33,9 @@ function Cube({
       hoverFactor = Math.exp(-dist / falloff);
     }
 
-    const targetZ = baseZ + 7 * hoverFactor + (position[1] + (gridY - 1) / 2) * screenScrollCtrl;
+    const targetZ = baseZ + 7 * hoverFactor + (position[1] - (gridY - 1) / 2) * screenScrollCtrl;
     const targetRX = baseRX + 1.7 * hoverFactor;
-    const targetPosY = 1 * (position[1] - (gridY - 1) / 2) * screenScrollCtrl;
+    const targetPosY = 0.7 * (position[1] - (gridY - 1) / 2) * screenScrollCtrl;
     const targetScale = screenScrollCtrl * 0.3;
     const baseY = position[1] - targetPosY * screenScrollCtrl;
 

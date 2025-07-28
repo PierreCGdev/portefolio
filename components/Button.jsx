@@ -3,18 +3,6 @@ import React from "react";
 const Button = ({ text, className = "", link }) => {
   return (
     <div>
-      {/* <a
-        href={link}
-        target="_blank"
-        className={`
-          border-1 border-current bg-transparent rounded-full px-10 py-5 m-10
-          text-blue-400 hover:text-pink-400
-          transition-colors duration-300 ease-in-out
-          text-sm sm:text-md md:text-lg xl:text-xl font-bold text-center
-        `}
-      >
-        {text}
-      </a> */}
       <div className="flex justify-center items-center dark:bg-blackmin-w-full min-h-full mt-5">
         <div className="group p-5">
           <button
