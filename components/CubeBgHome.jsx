@@ -4,12 +4,21 @@ import { useTheme } from "next-themes";
 import * as THREE from "three";
 
 // Cube individuel avec effet falloff
-function Cube({ position, cubeColor, hoverColor, hoveredPosition, setHoveredPosition }) {
+function Cube({
+  position,
+  cubeColor,
+  hoverColor,
+  hoveredPosition,
+  setHoveredPosition,
+  screenScroll,
+  gridY,
+}) {
   const ref = useRef();
 
   const baseZ = position[2];
   const baseRX = 0;
-
+  const speedFactor = useRef(0.3 + Math.random() * 0.7).current;
+  const screenScrollCtrl = Math.max(0, Math.min(1, screenScroll));
   useFrame(() => {
     if (!ref.current) return;
 
@@ -24,12 +33,18 @@ function Cube({ position, cubeColor, hoverColor, hoveredPosition, setHoveredPosi
       hoverFactor = Math.exp(-dist / falloff);
     }
 
-    const targetZ = baseZ + 7 * hoverFactor;
+    const targetZ = baseZ + 7 * hoverFactor + (position[1] + (gridY - 1) / 2) * screenScrollCtrl;
     const targetRX = baseRX + 1.7 * hoverFactor;
+    const targetPosY = 1 * (position[1] - (gridY - 1) / 2) * screenScrollCtrl;
+    const targetScale = screenScrollCtrl * 0.3;
+    const baseY = position[1] - targetPosY * screenScrollCtrl;
 
     ref.current.position.z += (targetZ - ref.current.position.z) * 0.06;
     ref.current.rotation.x += (targetRX - ref.current.rotation.x) * 0.06;
-
+    ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * (0.05 * speedFactor);
+    ref.current.scale.x += (1 - targetScale - ref.current.scale.x) * 0.05 * speedFactor;
+    ref.current.scale.y += (1 - targetScale - ref.current.scale.y) * 0.05 * speedFactor;
+    ref.current.scale.z += (1 - targetScale - ref.current.scale.z) * 0.05 * speedFactor;
     const base = new THREE.Color(cubeColor);
     const hover = new THREE.Color(hoverColor);
     ref.current.material.color.copy(base).lerp(hover, hoverFactor);
@@ -54,6 +69,9 @@ export default function CubeBackground({ yScroll, widthDivier = 130, heightDivid
   const groupRef = useRef();
   const { theme } = useTheme();
   const { size } = useThree();
+
+  // calcul de la hauteur du scroll en fonction de la position actuelle du composant dans page.js (ne pas dépasser 1)
+  const currentScroll = yScroll.current / size.height;
 
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
   const hoverColor = theme === "light" ? "#aaaaaa" : "#4d4d4d";
@@ -100,6 +118,8 @@ export default function CubeBackground({ yScroll, widthDivier = 130, heightDivid
           hoverColor={hoverColor}
           hoveredPosition={hoveredPosition}
           setHoveredPosition={setHoveredPosition}
+          screenScroll={currentScroll}
+          gridY={gridY}
         />
       ))}
     </group>

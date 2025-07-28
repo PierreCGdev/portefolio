@@ -12,18 +12,18 @@ function Cube({ position, screenScroll, gridY }) {
   useFrame(() => {
     if (!ref.current) return;
     const targetRotation = screenScroll * (Math.PI / 2);
-    const targetPosZ = 4 * (position[1] + (gridY - 1) / 2);
-    const targetPosY = 4 * (position[1] - (gridY - 1) / 4);
-
+    const targetPosZ = position[1] + (gridY - 1) / 2;
+    const targetPosY = 2.35 * (position[1] - (gridY - 1) / 4);
+    const targetScale = 0.7 + screenScroll * 0.3;
     // Calcul de la position de base en fonction du scroll et de la grille
     const baseZ = position[2] + targetPosZ * screenScroll;
     const baseY = position[1] - targetPosY * screenScroll;
     ref.current.rotation.x += (targetRotation - ref.current.rotation.x) * (0.05 * speedFactor);
     ref.current.position.z += (baseZ - ref.current.position.z - targetPosZ) * (0.05 * speedFactor);
     ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * (0.05 * speedFactor);
-    ref.current.scale.x += (screenScroll - ref.current.scale.x) * 0.05 * speedFactor;
-    ref.current.scale.y += (screenScroll - ref.current.scale.y) * 0.05 * speedFactor;
-    ref.current.scale.z += (screenScroll - ref.current.scale.z) * 0.05 * speedFactor;
+    ref.current.scale.x += (targetScale - ref.current.scale.x) * 0.05 * speedFactor;
+    ref.current.scale.y += (targetScale - ref.current.scale.y) * 0.05 * speedFactor;
+    ref.current.scale.z += (targetScale - ref.current.scale.z) * 0.05 * speedFactor;
   });
 
   return (

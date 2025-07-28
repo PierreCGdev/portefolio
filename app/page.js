@@ -99,7 +99,11 @@ export default function Home() {
                 shadow-camera-left={-20}
                 shadow-camera-right={20}
               />
-              <CubeBgHome widthDivier={widthDivier} heightDivider={heightDivider} />
+              <CubeBgHome
+                yScroll={yScroll}
+                widthDivier={widthDivier}
+                heightDivider={heightDivider}
+              />
             </Canvas>
           </div>
           <div className="relative h-screen w-screen">
@@ -115,11 +119,11 @@ export default function Home() {
                 shadow-camera-left={-20}
                 shadow-camera-right={20}
               />
-              <CubeBgMid
+              {/* <CubeBgMid
                 yScroll={yScroll}
                 widthDivier={widthDivier}
                 heightDivider={heightDivider}
-              />
+              /> */}
             </Canvas>
           </div>
           <div className="relative h-screen w-screen">

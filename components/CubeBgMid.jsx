@@ -8,41 +8,37 @@ function Cube({ position, screenScroll, gridY }) {
   const screenScrollCtrl =
     screenScroll <= 0
       ? 0
-      : screenScroll <= 0.7
-        ? screenScroll / 0.7
-        : screenScroll <= 1.3
+      : screenScroll <= 0.9
+        ? screenScroll / 0.9
+        : screenScroll <= 1.1
           ? 1
           : screenScroll <= 2
-            ? 1 - (screenScroll - 1.3) / 0.7
+            ? 1 - (screenScroll - 1.1) / 0.9
             : 0;
   const { theme } = useTheme();
   const ref = useRef();
   const cubeColor = theme === "light" ? "#ffffff" : "#121212";
   // random pour le rotation et position
-  const speedFactor = useRef(0.3 + Math.random() * 0.7).current; // ∈ [0.3, 1)
+  const speedFactor = 0.1 * useRef(0.3 + Math.random() * 0.7).current; // ∈ [0.3, 1)
   useFrame(() => {
     if (!ref.current) return;
     const targetRotation = screenScrollCtrl * (Math.PI / 2);
     const targetPosY =
       screenScroll > 1 ? 1 * (position[1] + (gridY - 1) / 4) : 1 * (position[1] - (gridY - 1) / 4);
 
-    const targetPosZ =
-      screenScroll > 1
-        ? 1.5 * (position[2] + (gridY - 1) / 4)
-        : 1.5 * (position[2] - (gridY - 1) / 4);
+    const targetPosZ = 1.5 * (position[2] + (gridY - 1) / 2);
 
     // Calcul de la position de base en fonction du scroll et de la grille
     const baseZ = position[2] + targetPosZ * screenScrollCtrl;
     const baseY = position[1] - targetPosY * screenScrollCtrl;
-    ref.current.rotation.x += (targetRotation - ref.current.rotation.x) * (0.05 * speedFactor);
-    ref.current.position.z += (baseZ - ref.current.position.z - targetPosZ) * (0.05 * speedFactor);
-    ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * (0.05 * speedFactor);
-    const targetScale = screenScrollCtrl;
-    const speed = 0.05 * speedFactor;
+    ref.current.rotation.x += (targetRotation - ref.current.rotation.x) * speedFactor;
+    ref.current.position.z += (baseZ - ref.current.position.z - targetPosZ) * speedFactor;
+    ref.current.position.y += (baseY - ref.current.position.y + targetPosY) * speedFactor;
+    const targetScale = 0.7 + screenScrollCtrl * 0.3;
 
-    ref.current.scale.x += (targetScale - ref.current.scale.x) * speed;
-    ref.current.scale.y += (targetScale - ref.current.scale.y) * speed;
-    ref.current.scale.z += (targetScale - ref.current.scale.z) * speed;
+    ref.current.scale.x += (targetScale - ref.current.scale.x) * speedFactor;
+    ref.current.scale.y += (targetScale - ref.current.scale.y) * speedFactor;
+    ref.current.scale.z += (targetScale - ref.current.scale.z) * speedFactor;
   });
 
   return (
@@ -59,10 +55,8 @@ export default function CubeBackground({ yScroll, widthDivier = 130, heightDivid
 
   const { size } = useThree();
   // début du scroll avant l'affichage du composant
-  const startScroll = size.height * 0.5;
+  const startScroll = size.height * 0.05;
   const middleScroll = size.height * 1 - startScroll;
-
-  const endScroll = size.height * 1.5 - middleScroll;
 
   // calcul de la hauteur du scroll en fonction de la position actuelle du composant dans page.js (ne pas dépasser 1)
   const currentScroll = (yScroll.current - startScroll) / middleScroll;
