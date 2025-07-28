@@ -17,7 +17,7 @@ export default function Header({ activeSection, sections }) {
       <a
         key={section}
         href={`#${section}`}
-        className={`hover:text-menu-secondary hover:dark:text-menu-secondary-dark  ${
+        className={`hover:text-menu-secondary hover:dark:text-menu-secondary-dark  font-bold text-xl xl:text-2xl  ${
           activeSection === section ? "text-menu-primary dark:text-menu-primary-dark" : ""
         }`}
       >
@@ -26,13 +26,6 @@ export default function Header({ activeSection, sections }) {
     );
   });
 
-  const sectionListMobile = sections.map((section) => {
-    return (
-      <a key={section} href={`#${section}`}>
-        {section}
-      </a>
-    );
-  });
   const menuVariants = {
     visible: {
       x: 0,
@@ -50,7 +43,7 @@ export default function Header({ activeSection, sections }) {
   return (
     <>
       <header className="w-full flex items-center justify-between px-15 py-10  fixed top-0 z-50 bg-gradient-to-b from-neutral-50/100 dark:from-neutral-800/100 to-transparent">
-        <div className="text-xl font-bold">Portfolio</div>
+        <div className="text-xl xl:text-2xl font-bold">Portfolio</div>
         <div className="flex items-center gap-10 lg:gap-14">
           <ThemeToggle />
           {/* Desktop menu */}
